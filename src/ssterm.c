@@ -13,7 +13,9 @@ int main(int argc,char** argv)
 	int tty_fd;
 //	fd_set rdset;
 	char tname[80] = "/dev/ttyO1"; // default terminal name.
-	unsigned char c='\0';
+//	unsigned char c='\0';
+	ssize_t read_len;
+	unsigned char read_data[256] = "\0";
 
 	printf("Please start with %s /dev/ttyS1 (for example)\n",argv[0]);
 	if (argc > 1)
@@ -38,9 +40,6 @@ int main(int argc,char** argv)
 	tcsetattr(STDOUT_FILENO,TCSAFLUSH,&stdio);
 	fcntl(STDIN_FILENO, F_SETFL, O_NONBLOCK);       // make the reads non-blocking
 
-
-
-
 	memset(&tio,0,sizeof(tio));
 	tio.c_iflag=0;
 	tio.c_oflag=0;
@@ -62,14 +61,24 @@ int main(int argc,char** argv)
 	tcgetattr(tty_fd,&old_tio);
 	tcsetattr(tty_fd,TCSANOW,&tio);
 
-	while (c!='q')
+	while (read_data[0] != 'q')
 	{
-		if (read(tty_fd,&c,1)>0)
+		// if new data is available on the serial port, print it out
+		if ((read_len = read(tty_fd,read_data,sizeof(read_data))) > 0)
 		{
-//			write(STDOUT_FILENO,&c,1);              // if new data is available on the serial port, print it out
-			dprintf(STDOUT_FILENO, "0x%x(%d) %c\r\n", c, c, c);
+			int i;
+
+//			write(STDOUT_FILENO,read_data,read_len);
+			dprintf(STDOUT_FILENO, "0x%x(%d): ", read_len, read_len);
+			for (i = 0; i < read_len; i ++)
+				dprintf(STDOUT_FILENO, "0x%x(%d)'%c' ", read_data[i], read_data[i], read_data[i]);
+			dprintf(STDOUT_FILENO, "\r\n");
 		}
-		if (read(STDIN_FILENO,&c,1)>0)  write(tty_fd,&c,1);                     // if new data is available on the console, send it to the serial port
+		// if new data is available on the console, send it to the serial port
+		if ((read_len = read(STDIN_FILENO,read_data,sizeof(read_len))) > 0)
+		{
+			write(tty_fd,read_data,read_len);
+		}
 	}
 
 	tcsetattr(tty_fd,TCSANOW,&old_tio);
