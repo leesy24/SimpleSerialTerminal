@@ -2,10 +2,10 @@
 <launchConfiguration type="org.eclipse.cdt.launch.remoteApplicationLaunchType">
 <intAttribute key="org.eclipse.cdt.launch.ATTR_BUILD_BEFORE_LAUNCH_ATTR" value="2"/>
 <stringAttribute key="org.eclipse.cdt.launch.COREFILE_PATH" value=""/>
-<stringAttribute key="org.eclipse.cdt.launch.PROGRAM_NAME" value="Release/SimpleSerialTerminal"/>
+<stringAttribute key="org.eclipse.cdt.launch.PROGRAM_NAME" value="Release on BBB/SimpleSerialTerminal"/>
 <stringAttribute key="org.eclipse.cdt.launch.PROJECT_ATTR" value="SimpleSerialTerminal"/>
 <booleanAttribute key="org.eclipse.cdt.launch.PROJECT_BUILD_CONFIG_AUTO_ATTR" value="true"/>
-<stringAttribute key="org.eclipse.cdt.launch.PROJECT_BUILD_CONFIG_ID_ATTR" value=""/>
+<stringAttribute key="org.eclipse.cdt.launch.PROJECT_BUILD_CONFIG_ID_ATTR" value="cdt.managedbuild.config.gnu.cross.exe.release.1208136420"/>
 <stringAttribute key="org.eclipse.debug.core.ATTR_PRERUN_CMDS" value=""/>
 <booleanAttribute key="org.eclipse.debug.core.ATTR_SKIP_DOWNLOAD_TO_TARGET" value="false"/>
 <stringAttribute key="org.eclipse.debug.core.ATTR_TARGET_PATH" value="/home/debian/SimpleSerialTerminal"/>
