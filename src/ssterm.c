@@ -146,7 +146,9 @@ int ComWrite(const void *buf, size_t n)
 
 int ComClose(void)
 {
+	printf("Closing com~\r\n");
 	CloseHandle(hComm);//Closing the Serial Port
+	printf("Close com success!\r\n");
 	return 0;
 }
 
@@ -247,8 +249,10 @@ int ComWrite(const void *buf, size_t n)
 
 int ComClose(void)
 {
+	printf("Closing com~\r\n");
 	tcsetattr(tty_fd,TCSANOW,&old_tio);
 	close(tty_fd);
+	printf("Close com success!\r\n");
 	return 0;
 }
 
@@ -292,7 +296,9 @@ int TermWrite(const void *buf, size_t n)
 
 int TermClose(void)
 {
+	printf("Closing terminal~\r\n");
 	tcsetattr(STDIN_FILENO, TCSANOW, &old_stdio);
+	printf("Close terminal success!\r\n");
 	return 0;
 }
 #endif
