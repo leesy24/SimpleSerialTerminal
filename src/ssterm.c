@@ -317,7 +317,7 @@ int main(int argc, char** argv)
 		exit(-1);
 	}
 
-	while (read_data[0] != 'q')
+	while (read_data[0] != 0x1b && read_data[0] != 'q')
 	{
 		// if new data is available on the serial port, print it out
 		if ((read_len = ComRead(read_data, sizeof(read_data))) > 0)
