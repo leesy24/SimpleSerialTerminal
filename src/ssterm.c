@@ -331,7 +331,7 @@ int main(int argc, char** argv)
 			TermWrite(read_data, read_len);
 		}
 		// if new data is available on the console, send it to the serial port
-		if ((read_len = TermRead(read_data, sizeof(read_len))) > 0)
+		if ((read_len = TermRead(read_data, sizeof(read_data))) > 0)
 		{
 			ComWrite(read_data, read_len);
 		}
